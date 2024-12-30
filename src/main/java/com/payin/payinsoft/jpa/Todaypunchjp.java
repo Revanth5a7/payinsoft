@@ -11,5 +11,7 @@ public interface Todaypunchjp extends JpaRepository<Todaypunch, Integer> {
     //List<Todaypunch> findAllByEmpid(Integer empid);
 
     List<Todaypunch> findAllByEmpinfo_EmployeeCode(Integer code);
+
+    //long countDistinctEmpinfo_EmployeeCode();
    
 }
