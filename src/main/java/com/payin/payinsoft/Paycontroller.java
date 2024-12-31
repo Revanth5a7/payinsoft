@@ -1,17 +1,18 @@
 package com.payin.payinsoft;
-
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.payin.payinsoft.dto.EmployeeHoursDTO;
 import com.payin.payinsoft.svc.EmpNames;
 import com.payin.payinsoft.svc.End;
 import com.payin.payinsoft.svc.Start;
+import com.payin.payinsoft.svc.Support;
 
 @RestController
 public class Paycontroller {
@@ -23,6 +24,9 @@ public class Paycontroller {
 
     @Autowired
     End end;
+
+    @Autowired
+    Support sup;
     
     @GetMapping("/names")
     public List<String> getallnames()
@@ -54,6 +58,15 @@ public class Paycontroller {
     // {     
     //     return ps.doValidation(empname,enteredpin); 
     // }
+
+    //report all staff (from date - to date)
+    @GetMapping("/reportforgivendates")
+    public List<EmployeeHoursDTO> getallstaffhours(@RequestParam LocalDate from, 
+                                                  @RequestParam LocalDate to)
+    {     
+        return sup.GenerateReportForRequiredDates(from, to); 
+    }
+
 
    
 }
